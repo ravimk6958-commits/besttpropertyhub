@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Bestt Property Hub – Find your dream property in India. Explore residential, commercial, and investment opportunities across prime locations." />
-  <meta name="keywords" content="real estate India, property buy, apartments, villas, commercial property, investment property" />
-  <title>Bestt Property Hub – Find Your Dream Property</title>
+  <meta name="description" content="Bestt Property Hub – Best real estate consultancy in Faridabad. Buy, sell, or invest in residential and commercial properties across all areas of Faridabad." />
+  <meta name="keywords" content="property in Faridabad, real estate Faridabad, flats in Faridabad, plots Faridabad, commercial property Faridabad, NIT Faridabad, Sector 12 Faridabad" />
+  <title>Bestt Property Hub – Best Property Consultancy in Faridabad</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script type="application/ld+json">
@@ -14,8 +14,9 @@
     "@type": "RealEstateAgent",
     "name": "Bestt Property Hub",
     "telephone": "+917011544551",
-    "address": { "@type": "PostalAddress", "addressCountry": "IN" },
-    "url": "https://besttpropertyhub.in"
+    "address": { "@type": "PostalAddress", "addressLocality": "Faridabad", "addressRegion": "Haryana", "addressCountry": "IN" },
+    "url": "https://besttpropertyhub.in",
+    "areaServed": "Faridabad"
   }
   </script>
 </head>
@@ -28,7 +29,7 @@
       <span class="logo-icon"><i class="fa-solid fa-building-columns"></i></span>
       <div class="logo-text">
         <span class="logo-main">Bestt Property</span>
-        <span class="logo-sub">Hub</span>
+        <span class="logo-sub">Hub – Faridabad</span>
       </div>
     </a>
 
@@ -43,6 +44,7 @@
             <li><a href="#upcoming">Upcoming Projects</a></li>
           </ul>
         </li>
+        <li><a href="#areas">Areas We Serve</a></li>
         <li><a href="#about">About Us</a></li>
         <li><a href="#blog">Blog</a></li>
         <li><a href="#contact">Contact Us</a></li>
@@ -50,7 +52,7 @@
     </nav>
 
     <div class="header-ctas">
-      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property." target="_blank" class="btn btn-whatsapp btn-sm">
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-sm">
         <i class="fa-brands fa-whatsapp"></i> WhatsApp
       </a>
       <a href="tel:+917011544551" class="btn btn-call btn-sm">
@@ -67,59 +69,77 @@
 <section class="hero" id="home">
   <div class="hero-overlay"></div>
   <div class="hero-content container">
-    <span class="hero-eyebrow">India's Trusted Real Estate Partner</span>
-    <h1 class="hero-title">Find Your Dream Property<br/><span>with Bestt Property Hub</span></h1>
-    <p class="hero-sub">Explore Residential, Commercial, and Investment Opportunities<br class="desktop-br" /> Across Prime Locations.</p>
+    <span class="hero-eyebrow"><i class="fa-solid fa-location-dot"></i> Faridabad's #1 Trusted Property Consultancy</span>
+    <h1 class="hero-title">Find Your Dream Property<br/><span>in Faridabad with Bestt Property Hub</span></h1>
+    <p class="hero-sub">Explore Residential, Commercial &amp; Investment Opportunities<br class="desktop-br" /> Across All Prime Areas of Faridabad.</p>
 
     <div class="search-card">
       <div class="search-fields">
         <div class="search-field">
           <label><i class="fa-solid fa-house"></i> Property Type</label>
-          <select>
+          <select id="heroType">
             <option value="">Select Type</option>
-            <option>Apartment</option>
-            <option>Villa</option>
+            <option>Apartment / Flat</option>
+            <option>Villa / Independent House</option>
             <option>Builder Floor</option>
-            <option>Plot</option>
+            <option>Residential Plot</option>
             <option>Office Space</option>
             <option>Retail Shop</option>
-            <option>Warehouse</option>
+            <option>Commercial Plot</option>
+            <option>Warehouse / Godown</option>
           </select>
         </div>
         <div class="search-field">
-          <label><i class="fa-solid fa-location-dot"></i> Location</label>
-          <select>
-            <option value="">Select City</option>
-            <option>Delhi NCR</option>
-            <option>Mumbai</option>
-            <option>Bangalore</option>
-            <option>Hyderabad</option>
-            <option>Pune</option>
-            <option>Chennai</option>
-            <option>Noida</option>
-            <option>Gurgaon</option>
+          <label><i class="fa-solid fa-location-dot"></i> Area in Faridabad</label>
+          <select id="heroArea">
+            <option value="">Select Area</option>
+            <option>NIT Faridabad</option>
+            <option>Sector 12</option>
+            <option>Sector 14</option>
+            <option>Sector 15</option>
+            <option>Sector 16</option>
+            <option>Sector 17</option>
+            <option>Sector 21C</option>
+            <option>Sector 21D</option>
+            <option>Sector 28</option>
+            <option>Sector 29</option>
+            <option>Sector 31</option>
+            <option>Sector 37</option>
+            <option>Sector 46</option>
+            <option>Sector 56</option>
+            <option>Sector 65</option>
+            <option>Sector 82</option>
+            <option>Sector 86</option>
+            <option>Sector 88</option>
+            <option>Ballabhgarh</option>
+            <option>Neharpar / Greater Faridabad</option>
+            <option>Surajkund</option>
+            <option>Tigaon</option>
+            <option>Mewla Maharajpur</option>
+            <option>Old Faridabad</option>
           </select>
         </div>
         <div class="search-field">
           <label><i class="fa-solid fa-indian-rupee-sign"></i> Budget</label>
-          <select>
+          <select id="heroBudget">
             <option value="">Select Budget</option>
-            <option>Under ₹25 Lakhs</option>
-            <option>₹25 – 50 Lakhs</option>
-            <option>₹50 – 1 Crore</option>
+            <option>Under ₹20 Lakhs</option>
+            <option>₹20 – 40 Lakhs</option>
+            <option>₹40 – 70 Lakhs</option>
+            <option>₹70 Lakhs – 1 Crore</option>
             <option>₹1 – 2 Crore</option>
             <option>₹2 Crore+</option>
           </select>
         </div>
-        <button class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        <button class="btn btn-search" id="heroSearchBtn"><i class="fa-solid fa-magnifying-glass"></i> Search on WhatsApp</button>
       </div>
     </div>
 
     <div class="hero-ctas">
       <a href="tel:+917011544551" class="btn btn-call btn-lg pulse-call">
-        <i class="fa-solid fa-phone"></i> Call Now
+        <i class="fa-solid fa-phone"></i> Call: +91 70115 44551
       </a>
-      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property." target="_blank" class="btn btn-whatsapp btn-lg">
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property%20in%20Faridabad.%20Please%20help%20me." target="_blank" class="btn btn-whatsapp btn-lg pulse-wa">
         <i class="fa-brands fa-whatsapp"></i> WhatsApp Now
       </a>
     </div>
@@ -130,21 +150,21 @@
 <!-- ========== TRUST STRIP ========== -->
 <section class="trust-strip">
   <div class="container trust-grid">
-    <div class="trust-item" data-count="500">
-      <span class="trust-num" data-target="500">0</span><span>+</span>
+    <div class="trust-item">
+      <span class="trust-num" data-target="500">0</span><span class="trust-plus">+</span>
       <p>Properties Listed</p>
     </div>
-    <div class="trust-item" data-count="100">
-      <span class="trust-num" data-target="100">0</span><span>+</span>
+    <div class="trust-item">
+      <span class="trust-num" data-target="300">0</span><span class="trust-plus">+</span>
       <p>Happy Clients</p>
     </div>
     <div class="trust-item">
-      <i class="fa-solid fa-circle-check trust-icon"></i>
-      <p>Verified Listings</p>
+      <span class="trust-num" data-target="24">0</span><span class="trust-plus"></span>
+      <p>Areas in Faridabad</p>
     </div>
     <div class="trust-item">
-      <i class="fa-solid fa-user-tie trust-icon"></i>
-      <p>Expert Consultants</p>
+      <i class="fa-solid fa-circle-check trust-icon"></i>
+      <p>Verified Listings Only</p>
     </div>
   </div>
 </section>
@@ -154,109 +174,153 @@
   <div class="container">
     <div class="section-head">
       <span class="section-label">Hand-Picked For You</span>
-      <h2>Featured Properties</h2>
-      <p>Premium listings curated by our expert team across top locations.</p>
+      <h2>Featured Properties in Faridabad</h2>
+      <p>Premium verified listings curated across prime areas of Faridabad.</p>
     </div>
     <div class="props-grid" id="featuredGrid"></div>
     <div class="section-footer">
-      <a href="#contact" class="btn btn-outline">View All Properties <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="https://wa.me/917011544551?text=Hi,%20please%20share%20all%20available%20properties%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-lg">
+        <i class="fa-brands fa-whatsapp"></i> View All Properties on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AREAS WE SERVE ========== -->
+<section class="section bg-light" id="areas">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-label">Our Coverage</span>
+      <h2>Areas We Serve in Faridabad</h2>
+      <p>We have verified property listings across every major area and sector in Faridabad.</p>
+    </div>
+    <div class="areas-grid">
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20NIT%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> NIT Faridabad</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2012%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 12</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2014%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 14</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2015%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 15</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2016%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 16</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2017%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 17</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2021C%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 21C</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2021D%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 21D</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2028%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 28</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2029%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 29</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2031%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 31</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2037%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 37</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2046%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 46</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2056%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 56</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2065%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 65</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2082%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 82</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2086%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 86</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Sector%2088%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Sector 88</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Ballabhgarh%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Ballabhgarh</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Neharpar%20Greater%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Neharpar / Greater Faridabad</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20near%20Surajkund%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Surajkund</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Tigaon%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Tigaon</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Mewla%20Maharajpur%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Mewla Maharajpur</a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20in%20Old%20Faridabad." target="_blank" class="area-chip"><i class="fa-solid fa-location-dot"></i> Old Faridabad</a>
+    </div>
+    <div class="section-footer">
+      <a href="tel:+917011544551" class="btn btn-call btn-lg">
+        <i class="fa-solid fa-phone"></i> Call for Any Area: +91 70115 44551
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ========== RESIDENTIAL ========== -->
-<section class="section bg-light" id="residential">
+<section class="section" id="residential">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">Live Better</span>
+      <span class="section-label">Live Better in Faridabad</span>
       <h2>Residential Properties</h2>
-      <p>Discover your perfect home from our wide residential portfolio.</p>
+      <p>Find your perfect home across Faridabad's best residential sectors and colonies.</p>
     </div>
     <div class="category-grid">
-      <div class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600')">
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20looking%20for%20an%20Apartment%20in%20Faridabad." target="_blank" class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600')">
         <div class="cat-overlay"></div>
         <div class="cat-content">
           <i class="fa-solid fa-building"></i>
-          <h3>Apartments</h3>
-          <span>120+ Listings</span>
+          <h3>Apartments / Flats</h3>
+          <span>120+ Listings in Faridabad</span>
         </div>
-      </div>
-      <div class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600')">
+      </a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20looking%20for%20a%20Villa%20in%20Faridabad." target="_blank" class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600')">
         <div class="cat-overlay"></div>
         <div class="cat-content">
           <i class="fa-solid fa-house-chimney"></i>
-          <h3>Villas</h3>
-          <span>60+ Listings</span>
+          <h3>Villas &amp; Independent Houses</h3>
+          <span>60+ Listings in Faridabad</span>
         </div>
-      </div>
-      <div class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600')">
+      </a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20looking%20for%20a%20Builder%20Floor%20in%20Faridabad." target="_blank" class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600')">
         <div class="cat-overlay"></div>
         <div class="cat-content">
           <i class="fa-solid fa-layer-group"></i>
           <h3>Builder Floors</h3>
-          <span>85+ Listings</span>
+          <span>85+ Listings in Faridabad</span>
         </div>
-      </div>
-      <div class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600')">
+      </a>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20looking%20for%20a%20Plot%20in%20Faridabad." target="_blank" class="cat-card" style="--cat-img: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600')">
         <div class="cat-overlay"></div>
         <div class="cat-content">
           <i class="fa-solid fa-tree"></i>
-          <h3>Plots</h3>
-          <span>200+ Listings</span>
+          <h3>Residential Plots</h3>
+          <span>200+ Listings in Faridabad</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- ========== COMMERCIAL ========== -->
-<section class="section" id="commercial">
+<section class="section bg-light" id="commercial">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">Grow Your Business</span>
+      <span class="section-label">Grow Your Business in Faridabad</span>
       <h2>Commercial Properties</h2>
-      <p>Strategically located commercial spaces to power your business growth.</p>
+      <p>Strategically located commercial spaces in Faridabad's industrial and business corridors.</p>
     </div>
     <div class="commercial-grid">
       <div class="comm-card">
         <div class="comm-icon"><i class="fa-solid fa-briefcase"></i></div>
         <h3>Office Spaces</h3>
-        <p>Premium offices in business districts — plug-and-play or shell.</p>
+        <p>Premium offices in Sector 16, NIT, and Neharpar commercial hubs.</p>
         <span class="comm-count">45+ Listings</span>
-        <a href="#contact" class="btn btn-outline btn-sm mt-auto">Enquire</a>
+        <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20an%20Office%20Space%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-sm mt-auto"><i class="fa-brands fa-whatsapp"></i> Enquire</a>
       </div>
       <div class="comm-card">
         <div class="comm-icon"><i class="fa-solid fa-store"></i></div>
         <h3>Retail Shops</h3>
-        <p>High-footfall retail units in malls, high streets, and market areas.</p>
+        <p>High-footfall shops in Faridabad markets, malls, and main roads.</p>
         <span class="comm-count">70+ Listings</span>
-        <a href="#contact" class="btn btn-outline btn-sm mt-auto">Enquire</a>
+        <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20a%20Retail%20Shop%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-sm mt-auto"><i class="fa-brands fa-whatsapp"></i> Enquire</a>
       </div>
       <div class="comm-card">
         <div class="comm-icon"><i class="fa-solid fa-chart-area"></i></div>
         <h3>Commercial Plots</h3>
-        <p>Prime commercial land in high-growth corridors for development.</p>
+        <p>Prime commercial land on GT Road, NH-19, and Ballabhgarh corridor.</p>
         <span class="comm-count">30+ Listings</span>
-        <a href="#contact" class="btn btn-outline btn-sm mt-auto">Enquire</a>
+        <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20a%20Commercial%20Plot%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-sm mt-auto"><i class="fa-brands fa-whatsapp"></i> Enquire</a>
       </div>
       <div class="comm-card">
         <div class="comm-icon"><i class="fa-solid fa-warehouse"></i></div>
-        <h3>Warehouses</h3>
-        <p>Logistics-ready industrial warehouses near major expressways.</p>
+        <h3>Warehouses &amp; Godowns</h3>
+        <p>Industrial warehouses near IMT Faridabad and NH-19 expressway.</p>
         <span class="comm-count">25+ Listings</span>
-        <a href="#contact" class="btn btn-outline btn-sm mt-auto">Enquire</a>
+        <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20a%20Warehouse%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-sm mt-auto"><i class="fa-brands fa-whatsapp"></i> Enquire</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ========== UPCOMING PROJECTS ========== -->
-<section class="section bg-light" id="upcoming">
+<section class="section" id="upcoming">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">Invest Early</span>
+      <span class="section-label">Invest Early in Faridabad</span>
       <h2>Upcoming Projects</h2>
-      <p>Pre-launch opportunities with best prices and RERA-approved assurance.</p>
+      <p>Pre-launch RERA-approved projects at best prices in Faridabad's high-growth areas.</p>
     </div>
     <div class="upcoming-grid" id="upcomingGrid"></div>
   </div>
@@ -265,18 +329,18 @@
 <!-- ========== WHY CHOOSE US ========== -->
 <section class="section why-section">
   <div class="container">
-    <div class="section-head light">
+    <div class="section-head">
       <span class="section-label">Our Promise</span>
-      <h2>Why Choose Bestt Property Hub</h2>
-      <p>We go beyond listings — we guide you to your best property decision.</p>
+      <h2>Why Choose Bestt Property Hub in Faridabad</h2>
+      <p>Faridabad's most trusted name in real estate — we go beyond listings to guide your best property decision.</p>
     </div>
     <div class="why-grid">
-      <div class="why-card"><div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div><h3>Verified Properties</h3><p>Every listing is physically verified and legally vetted by our experts.</p></div>
-      <div class="why-card"><div class="why-icon"><i class="fa-solid fa-handshake"></i></div><h3>Transparent Dealings</h3><p>No hidden charges. Complete clarity at every stage of the transaction.</p></div>
-      <div class="why-card"><div class="why-icon"><i class="fa-solid fa-user-tie"></i></div><h3>Expert Guidance</h3><p>Seasoned consultants with deep market knowledge at your service.</p></div>
-      <div class="why-card"><div class="why-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Best Investment Opportunities</h3><p>Data-driven insights to find properties with maximum ROI potential.</p></div>
-      <div class="why-card"><div class="why-icon"><i class="fa-solid fa-circle-check"></i></div><h3>End-to-End Support</h3><p>From site visits to registration, we handle it all on your behalf.</p></div>
-      <div class="why-card"><div class="why-icon"><i class="fa-solid fa-map-location-dot"></i></div><h3>Site Visit Assistance</h3><p>Organized property tours with detailed briefings before you visit.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div><h3>Verified Properties</h3><p>Every Faridabad listing is physically verified and legally vetted by our local experts.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-handshake"></i></div><h3>Transparent Dealings</h3><p>No hidden charges. Complete clarity at every stage — from visit to registration.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-user-tie"></i></div><h3>Local Expert Guidance</h3><p>Deep knowledge of all Faridabad sectors, their growth potential and current rates.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-chart-line"></i></div><h3>Best Investment Deals</h3><p>Data-driven recommendations for maximum ROI in Faridabad's growing market.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-circle-check"></i></div><h3>End-to-End Support</h3><p>From site visits to registration, loan assistance, and documentation — all handled.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-map-location-dot"></i></div><h3>Free Site Visits</h3><p>We arrange organised property tours across all Faridabad areas at your convenience.</p></div>
     </div>
   </div>
 </section>
@@ -285,31 +349,39 @@
 <section class="section bg-light" id="investment">
   <div class="container invest-layout">
     <div class="invest-text">
-      <span class="section-label">Smart Money Moves</span>
-      <h2>Why Invest in Real Estate?</h2>
-      <p>Real estate remains India's most trusted wealth-building instrument. Here's why smart investors choose property.</p>
-      <a href="#contact" class="btn btn-primary mt-2">Talk to an Expert <i class="fa-solid fa-arrow-right"></i></a>
+      <span class="section-label">Why Invest in Faridabad</span>
+      <h2>Faridabad Real Estate is Booming</h2>
+      <p>With Metro connectivity, NH-19 expansion, and rapid infrastructure development, Faridabad is among Haryana's fastest-growing real estate markets — offering excellent appreciation and rental yields.</p>
+      <ul class="lead-perks" style="margin-bottom:1.5rem">
+        <li><i class="fa-solid fa-check"></i> Metro Phase 2 driving Neharpar prices up 20%+</li>
+        <li><i class="fa-solid fa-check"></i> IMT Faridabad fuelling industrial property demand</li>
+        <li><i class="fa-solid fa-check"></i> Affordable compared to Gurgaon &amp; Noida</li>
+        <li><i class="fa-solid fa-check"></i> Excellent Delhi connectivity via NH-19 &amp; KMP</li>
+      </ul>
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20want%20to%20invest%20in%20Faridabad%20real%20estate.%20Please%20guide%20me." target="_blank" class="btn btn-whatsapp btn-lg">
+        <i class="fa-brands fa-whatsapp"></i> Talk to an Expert
+      </a>
     </div>
     <div class="invest-cards">
-      <div class="invest-card">
+      <div class="invest-card reveal">
         <i class="fa-solid fa-arrow-trend-up"></i>
-        <h4>Appreciation Potential</h4>
-        <p>Prime Indian real estate has delivered 8–15% annual appreciation over the last decade.</p>
+        <h4>Capital Appreciation</h4>
+        <p>Faridabad properties have shown 10–18% annual appreciation in developing sectors like Neharpar and Sector 82+.</p>
       </div>
-      <div class="invest-card">
+      <div class="invest-card reveal">
         <i class="fa-solid fa-money-bill-wave"></i>
         <h4>Rental Income</h4>
-        <p>Generate consistent passive income with 3–6% gross rental yields in key cities.</p>
+        <p>Strong rental demand from industrial workers and professionals — 3–5% gross yields across residential sectors.</p>
       </div>
-      <div class="invest-card">
+      <div class="invest-card reveal">
         <i class="fa-solid fa-file-invoice"></i>
         <h4>Tax Benefits</h4>
-        <p>Enjoy deductions under Section 80C, 24(b), and 80EEA on home loan interest.</p>
+        <p>Enjoy deductions under Section 80C, 24(b), and 80EEA on your home loan interest for Faridabad properties.</p>
       </div>
-      <div class="invest-card">
+      <div class="invest-card reveal">
         <i class="fa-solid fa-vault"></i>
         <h4>Secure Investment</h4>
-        <p>A tangible, long-term asset backed by land — inflation-proof and resilient.</p>
+        <p>Tangible, inflation-proof asset with growing demand from Delhi NCR spillover buyers choosing Faridabad.</p>
       </div>
     </div>
   </div>
@@ -318,9 +390,9 @@
 <!-- ========== TESTIMONIALS ========== -->
 <section class="section testimonials-section">
   <div class="container">
-    <div class="section-head light">
+    <div class="section-head">
       <span class="section-label">Client Stories</span>
-      <h2>What Our Clients Say</h2>
+      <h2>What Faridabad Clients Say</h2>
     </div>
     <div class="testimonials-wrapper">
       <div class="testimonials-track" id="testimonialsTrack"></div>
@@ -334,44 +406,89 @@
   <div class="container lead-layout">
     <div class="lead-text">
       <span class="section-label">Free Consultation</span>
-      <h2>Get Free Property Consultation</h2>
-      <p>Our property advisors are available 7 days a week to help you find, evaluate, and close the right deal. No fees. No obligations.</p>
+      <h2>Get Free Property Consultation in Faridabad</h2>
+      <p>Fill the form below — your details go directly to our WhatsApp so we can respond instantly. No spam, no delays.</p>
       <ul class="lead-perks">
-        <li><i class="fa-solid fa-check"></i> Free market analysis</li>
-        <li><i class="fa-solid fa-check"></i> Verified property shortlisting</li>
-        <li><i class="fa-solid fa-check"></i> Loan assistance guidance</li>
-        <li><i class="fa-solid fa-check"></i> Legal documentation support</li>
+        <li><i class="fa-solid fa-check"></i> Free Faridabad market analysis</li>
+        <li><i class="fa-solid fa-check"></i> Verified shortlisting within 2 hours</li>
+        <li><i class="fa-solid fa-check"></i> Home loan &amp; legal guidance</li>
+        <li><i class="fa-solid fa-check"></i> Free site visit assistance</li>
       </ul>
+      <div class="lead-direct-ctas">
+        <a href="tel:+917011544551" class="btn btn-call btn-lg">
+          <i class="fa-solid fa-phone"></i> Call Directly
+        </a>
+        <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20property%20consultation%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-lg">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      </div>
     </div>
     <div class="lead-form-card">
-      <h3>Request a Callback</h3>
+      <h3><i class="fa-brands fa-whatsapp" style="color:#16a34a"></i> Send Enquiry via WhatsApp</h3>
+      <p class="form-note">Your enquiry is sent directly to our WhatsApp — instant response guaranteed!</p>
       <form id="leadForm" class="lead-form" novalidate>
         <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" placeholder="Your full name" required />
+          <label>Full Name *</label>
+          <input type="text" id="lf_name" placeholder="Your full name" required />
         </div>
         <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" placeholder="+91 XXXXX XXXXX" required />
+          <label>Phone Number *</label>
+          <input type="tel" id="lf_phone" placeholder="+91 XXXXX XXXXX" required />
         </div>
         <div class="form-group">
-          <label>Property Interest</label>
-          <select required>
+          <label>Property Interest *</label>
+          <select id="lf_interest" required>
             <option value="">Select interest</option>
-            <option>Residential – Buy</option>
-            <option>Residential – Rent</option>
+            <option>Apartment / Flat – Buy</option>
+            <option>Villa / Independent House – Buy</option>
+            <option>Builder Floor – Buy</option>
+            <option>Residential Plot</option>
             <option>Commercial Property</option>
-            <option>Plot / Land</option>
-            <option>Investment Property</option>
+            <option>Investment / Rental Property</option>
+            <option>Upcoming Projects</option>
           </select>
         </div>
         <div class="form-group">
-          <label>Message</label>
-          <textarea rows="3" placeholder="Tell us about your requirements…"></textarea>
+          <label>Preferred Area in Faridabad</label>
+          <select id="lf_area">
+            <option value="">Any area</option>
+            <option>NIT Faridabad</option>
+            <option>Sector 12</option>
+            <option>Sector 14–17</option>
+            <option>Sector 21C / 21D</option>
+            <option>Sector 28–31</option>
+            <option>Sector 37</option>
+            <option>Sector 46</option>
+            <option>Sector 56–65</option>
+            <option>Sector 82–88</option>
+            <option>Ballabhgarh</option>
+            <option>Neharpar / Greater Faridabad</option>
+            <option>Old Faridabad</option>
+            <option>Any Area</option>
+          </select>
         </div>
-        <button type="submit" class="btn btn-primary full-width">
-          <i class="fa-solid fa-paper-plane"></i> Request Callback
+        <div class="form-group">
+          <label>Budget</label>
+          <select id="lf_budget">
+            <option value="">Select budget</option>
+            <option>Under ₹20 Lakhs</option>
+            <option>₹20 – 40 Lakhs</option>
+            <option>₹40 – 70 Lakhs</option>
+            <option>₹70 Lakhs – 1 Crore</option>
+            <option>₹1 – 2 Crore</option>
+            <option>₹2 Crore+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional Message</label>
+          <textarea id="lf_msg" rows="2" placeholder="Any specific requirements…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-whatsapp full-width btn-lg">
+          <i class="fa-brands fa-whatsapp"></i> Send Enquiry on WhatsApp
         </button>
+        <a href="tel:+917011544551" class="btn btn-call full-width btn-lg" style="margin-top:0.5rem">
+          <i class="fa-solid fa-phone"></i> Or Call Now: +91 70115 44551
+        </a>
       </form>
     </div>
   </div>
@@ -382,26 +499,31 @@
   <div class="container about-layout">
     <div class="about-visual">
       <div class="about-img-wrap">
-        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700" alt="Bestt Property Hub office" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700" alt="Bestt Property Hub Faridabad office" loading="lazy" />
         <div class="about-badge">
           <span class="badge-num">10+</span>
-          <span class="badge-label">Years of Excellence</span>
+          <span class="badge-label">Years in Faridabad</span>
         </div>
       </div>
     </div>
     <div class="about-content">
       <span class="section-label">Our Story</span>
       <h2>About Bestt Property Hub</h2>
-      <p>Bestt Property Hub is a premier real estate consultancy dedicated to simplifying the property journey for buyers, investors, and home seekers across India. Founded on the principles of transparency, integrity, and client-first service, we have helped hundreds of families and businesses find their ideal property.</p>
-      <p>Our team of certified consultants brings together deep local market expertise with a data-driven approach — ensuring every decision you make is backed by research, not guesswork.</p>
+      <p>Bestt Property Hub is Faridabad's most trusted real estate consultancy, dedicated to simplifying the property journey for buyers, investors, and home seekers across all areas of Faridabad — from Old Faridabad and NIT to Neharpar and Ballabhgarh.</p>
+      <p>With deep local knowledge of every sector, colony, and upcoming development in Faridabad, our certified consultants ensure you find the right property at the right price — with full transparency and zero hidden charges.</p>
       <div class="about-stats">
-        <div><strong>500+</strong><span>Properties Sold</span></div>
-        <div><strong>100+</strong><span>Happy Families</span></div>
-        <div><strong>15+</strong><span>Cities Covered</span></div>
+        <div><strong>500+</strong><span>Properties in Faridabad</span></div>
+        <div><strong>300+</strong><span>Happy Families</span></div>
+        <div><strong>24+</strong><span>Areas Covered</span></div>
       </div>
-      <a href="tel:+917011544551" class="btn btn-primary">
-        <i class="fa-solid fa-phone"></i> Speak to Us
-      </a>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem">
+        <a href="tel:+917011544551" class="btn btn-call btn-lg">
+          <i class="fa-solid fa-phone"></i> Call Us
+        </a>
+        <a href="https://wa.me/917011544551?text=Hi,%20I%20want%20to%20know%20more%20about%20Bestt%20Property%20Hub." target="_blank" class="btn btn-whatsapp btn-lg">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp Us
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -409,48 +531,49 @@
 <!-- ========== FAQ ========== -->
 <section class="section faq-section">
   <div class="container">
-    <div class="section-head light">
+    <div class="section-head">
       <span class="section-label">Common Questions</span>
       <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about buying property in Faridabad.</p>
     </div>
     <div class="faq-list" id="faqList"></div>
   </div>
 </section>
 
 <!-- ========== BLOG ========== -->
-<section class="section bg-light" id="blog">
+<section class="section" id="blog">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">Insights & Advice</span>
+      <span class="section-label">Faridabad Property Insights</span>
       <h2>From Our Blog</h2>
-      <p>Stay informed with expert opinions, market updates, and buying guides.</p>
+      <p>Expert opinions, Faridabad market updates, and buying guides to help you decide better.</p>
     </div>
     <div class="blog-grid" id="blogGrid"></div>
   </div>
 </section>
 
 <!-- ========== CONTACT ========== -->
-<section class="section" id="contact">
+<section class="section bg-light" id="contact">
   <div class="container">
     <div class="section-head">
-      <span class="section-label">Reach Us</span>
+      <span class="section-label">Reach Us in Faridabad</span>
       <h2>Contact Us</h2>
-      <p>Have questions? We're available 7 days a week to assist you.</p>
+      <p>Available 7 days a week to help you find the best property in Faridabad.</p>
     </div>
     <div class="contact-layout">
       <div class="contact-info">
         <div class="contact-detail">
           <i class="fa-solid fa-phone"></i>
           <div>
-            <strong>Call Us</strong>
+            <strong>Call Us (7 Days)</strong>
             <a href="tel:+917011544551">+91 70115 44551</a>
           </div>
         </div>
         <div class="contact-detail">
           <i class="fa-brands fa-whatsapp"></i>
           <div>
-            <strong>WhatsApp</strong>
-            <a href="https://wa.me/917011544551" target="_blank">+91 70115 44551</a>
+            <strong>WhatsApp (Instant Response)</strong>
+            <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20help%20with%20a%20property%20in%20Faridabad." target="_blank">+91 70115 44551</a>
           </div>
         </div>
         <div class="contact-detail">
@@ -463,36 +586,60 @@
         <div class="contact-detail">
           <i class="fa-solid fa-location-dot"></i>
           <div>
-            <strong>Office Address</strong>
-            <span>Bestt Property Hub, Delhi NCR, India</span>
+            <strong>Office Location</strong>
+            <span>Bestt Property Hub, Faridabad, Haryana, India</span>
           </div>
         </div>
         <div class="map-placeholder">
           <i class="fa-solid fa-map-location-dot"></i>
-          <p>Google Maps Integration</p>
-          <span>Bestt Property Hub, Delhi NCR</span>
+          <p>Faridabad, Haryana</p>
+          <span>Serving All Areas of Faridabad</span>
+        </div>
+        <div class="contact-cta-box">
+          <p>Get an instant response right now:</p>
+          <a href="https://wa.me/917011544551?text=Hi,%20I%20need%20help%20with%20a%20property%20in%20Faridabad." target="_blank" class="btn btn-whatsapp btn-lg full-width">
+            <i class="fa-brands fa-whatsapp"></i> Message Us on WhatsApp
+          </a>
         </div>
       </div>
       <div class="contact-form-card">
-        <h3>Send Us a Message</h3>
+        <h3><i class="fa-brands fa-whatsapp" style="color:#16a34a;margin-right:0.4rem"></i>Send Your Query via WhatsApp</h3>
+        <p class="form-note">Fill below — we'll receive it directly on WhatsApp and call back within minutes.</p>
         <form id="contactForm" novalidate>
           <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Your name" required />
+            <label>Full Name *</label>
+            <input type="text" id="cf_name" placeholder="Your name" required />
           </div>
           <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="+91 XXXXX XXXXX" required />
+            <label>Phone Number *</label>
+            <input type="tel" id="cf_phone" placeholder="+91 XXXXX XXXXX" required />
           </div>
           <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="you@email.com" />
+            <label>Property Looking For</label>
+            <select id="cf_type">
+              <option value="">Select property type</option>
+              <option>Apartment / Flat</option>
+              <option>Villa / Independent House</option>
+              <option>Builder Floor</option>
+              <option>Plot</option>
+              <option>Office / Commercial Space</option>
+              <option>Warehouse / Godown</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preferred Area in Faridabad</label>
+            <input type="text" id="cf_area" placeholder="e.g. Sector 15, NIT, Neharpar…" />
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea rows="4" placeholder="How can we help you?" required></textarea>
+            <textarea id="cf_msg" rows="3" placeholder="Tell us your budget, BHK preference, etc."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary full-width">Send Message <i class="fa-solid fa-arrow-right"></i></button>
+          <button type="submit" class="btn btn-whatsapp full-width btn-lg">
+            <i class="fa-brands fa-whatsapp"></i> Send on WhatsApp
+          </button>
+          <a href="tel:+917011544551" class="btn btn-call full-width btn-lg" style="margin-top:0.6rem">
+            <i class="fa-solid fa-phone"></i> Call: +91 70115 44551
+          </a>
         </form>
       </div>
     </div>
@@ -507,10 +654,10 @@
         <span class="logo-icon"><i class="fa-solid fa-building-columns"></i></span>
         <div class="logo-text">
           <span class="logo-main">Bestt Property</span>
-          <span class="logo-sub">Hub</span>
+          <span class="logo-sub">Hub – Faridabad</span>
         </div>
       </a>
-      <p>Your trusted partner for residential, commercial, and investment properties across India.</p>
+      <p>Faridabad's most trusted real estate consultancy. Serving all sectors and areas of Faridabad since 2015.</p>
       <div class="social-icons">
         <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -522,6 +669,8 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="#home">Home</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#areas">Areas We Serve</a></li>
         <li><a href="#about">About Us</a></li>
         <li><a href="#blog">Blog</a></li>
         <li><a href="#contact">Contact Us</a></li>
@@ -531,54 +680,56 @@
     <div class="footer-col">
       <h4>Property Categories</h4>
       <ul>
-        <li><a href="#residential">Apartments</a></li>
-        <li><a href="#residential">Villas</a></li>
+        <li><a href="#residential">Apartments / Flats</a></li>
+        <li><a href="#residential">Villas &amp; Houses</a></li>
         <li><a href="#residential">Builder Floors</a></li>
-        <li><a href="#residential">Plots</a></li>
+        <li><a href="#residential">Residential Plots</a></li>
         <li><a href="#commercial">Office Spaces</a></li>
         <li><a href="#commercial">Retail Shops</a></li>
+        <li><a href="#commercial">Warehouses</a></li>
         <li><a href="#upcoming">Upcoming Projects</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Contact Details</h4>
+      <h4>Contact – Faridabad</h4>
       <ul class="footer-contact">
         <li><i class="fa-solid fa-phone"></i><a href="tel:+917011544551">+91 70115 44551</a></li>
         <li><i class="fa-solid fa-envelope"></i><a href="mailto:info@besttpropertyhub.in">info@besttpropertyhub.in</a></li>
-        <li><i class="fa-solid fa-location-dot"></i>Delhi NCR, India</li>
+        <li><i class="fa-solid fa-location-dot"></i>Faridabad, Haryana, India</li>
       </ul>
-      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property." target="_blank" class="btn btn-whatsapp btn-sm footer-wa">
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20looking%20for%20a%20property%20in%20Faridabad." target="_blank" class="btn btn-whatsapp footer-wa">
         <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
       </a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 Bestt Property Hub. All rights reserved. | Designed for excellence in Indian real estate.</p>
+    <p>© 2025 Bestt Property Hub. All rights reserved. | Real Estate Consultancy in Faridabad, Haryana.</p>
   </div>
 </footer>
 
 <!-- ========== FLOATING BUTTONS ========== -->
-<a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property." target="_blank" class="float-whatsapp" aria-label="WhatsApp Us">
+<a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property%20in%20Faridabad." target="_blank" class="float-whatsapp" aria-label="WhatsApp Us">
   <i class="fa-brands fa-whatsapp"></i>
-  <span class="float-tooltip">Chat with Us!</span>
+  <span class="float-tooltip">Property in Faridabad?</span>
 </a>
 
 <a href="tel:+917011544551" class="float-call" aria-label="Call Us">
   <i class="fa-solid fa-phone"></i>
+  <span class="float-call-label">Call Now</span>
 </a>
 
 <!-- ========== EXIT INTENT POPUP ========== -->
 <div class="popup-overlay" id="exitPopup">
   <div class="popup-card">
     <button class="popup-close" id="popupClose" aria-label="Close popup"><i class="fa-solid fa-xmark"></i></button>
-    <div class="popup-badge">🏡 Limited Offer</div>
-    <h3>Looking for the Best Property Deal?</h3>
-    <p>Get <strong>Free Expert Consultation</strong> from our top property advisors — no fees, no obligations.</p>
+    <div class="popup-badge">🏡 Faridabad Properties</div>
+    <h3>Looking for the Best Property Deal in Faridabad?</h3>
+    <p>Get <strong>Free Expert Consultation</strong> from Faridabad's top property advisors — instant response, no fees.</p>
     <div class="popup-ctas">
       <a href="tel:+917011544551" class="btn btn-call btn-lg">
         <i class="fa-solid fa-phone"></i> Call Now
       </a>
-      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20interested%20in%20a%20property." target="_blank" class="btn btn-whatsapp btn-lg">
+      <a href="https://wa.me/917011544551?text=Hi,%20I%20am%20looking%20for%20a%20property%20in%20Faridabad.%20Please%20help." target="_blank" class="btn btn-whatsapp btn-lg">
         <i class="fa-brands fa-whatsapp"></i> WhatsApp Now
       </a>
     </div>
