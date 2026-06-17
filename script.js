@@ -1,12 +1,20 @@
-cat > /home/claude/script.js << 'JSEOF'
 /* ============================================================
    BESTT PROPERTY HUB — script.js
    Forms submit directly to WhatsApp. All CTAs functional.
    ============================================================ */
 
-const WA_NUMBER = "917011544551";
+const WA_NUMBER = "917011054451";
 function waLink(msg) {
   return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+}
+
+/* Reliable WhatsApp redirect — uses location.href instead of window.open
+   because mobile browsers (Chrome/Safari on Android & iOS) frequently block
+   window.open() popups fired from inside form-submit handlers. A direct
+   location change is never blocked and works identically on desktop. */
+function goToWhatsApp(msg) {
+  const url = waLink(msg);
+  window.location.href = url;
 }
 
 /* ---- DATA -------------------------------------------------- */
@@ -43,7 +51,7 @@ const FAQS = [
   { q: "What are the stamp duty charges in Faridabad (Haryana)?", a: "In Haryana, stamp duty is 5% for women buyers and 7% for men. Registration charges are 1% of the property value. We provide a complete cost breakdown inclusive of all charges before you make any decision." },
   { q: "Can I get a free site visit arranged for properties in Faridabad?", a: "Yes! We arrange free site visits across all Faridabad areas at a time convenient for you — weekdays or weekends. Our consultant accompanies you and provides detailed briefing on the property, area, and investment potential." },
   { q: "Do you handle property registration and legal paperwork in Faridabad?", a: "Yes, we provide end-to-end support including drafting the agreement to sell, coordinating with lawyers for title verification, accompanying you to the Sub-Registrar office in Faridabad, and ensuring a smooth registration." },
-  { q: "How can I contact Bestt Property Hub for a property in Faridabad?", a: "Simply call or WhatsApp us at +91 70115 44551 — we're available 7 days a week from 9 AM to 8 PM. You can also fill any enquiry form on this page and we will respond within minutes on WhatsApp." }
+  { q: "How can I contact Bestt Property Hub for a property in Faridabad?", a: "Simply call or WhatsApp us at +91 70110 54451 — we're available 7 days a week from 9 AM to 8 PM. You can also fill any enquiry form on this page and we will respond within minutes on WhatsApp." }
 ];
 
 const BLOGS = [
@@ -76,7 +84,7 @@ function renderProperties() {
       </div>
       <div class="prop-actions">
         <a href="${waLink('Hi, I am interested in ' + p.title + ' at ' + p.location + ' priced at ' + p.price + '. Please share more details.')}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        <a href="tel:+917011544551" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call</a>
+        <a href="tel:+917011054451" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call</a>
       </div>
     </article>
   `).join('');
@@ -213,7 +221,7 @@ function initHeroSearch() {
     if (area)   msg += '\nArea: ' + area;
     if (budget) msg += '\nBudget: ' + budget;
     msg += '\nPlease share available options.';
-    window.open(waLink(msg), '_blank');
+    goToWhatsApp(msg);
   });
 }
 
@@ -245,9 +253,7 @@ function initForms() {
       if (budget)  msg += '\n*Budget:* ' + budget;
       if (msg_txt) msg += '\n*Message:* ' + msg_txt;
       msg += '\n\n_Sent from BesttPropertyHub.in_';
-      window.open(waLink(msg), '_blank');
-      showToast('✅ Opening WhatsApp with your enquiry!');
-      lf.reset();
+      goToWhatsApp(msg);
     });
   }
 
@@ -273,9 +279,7 @@ function initForms() {
       if (area)  msg += '\n*Area in Faridabad:* ' + area;
       if (msg_t) msg += '\n*Message:* ' + msg_t;
       msg += '\n\n_Sent from Contact Page – BesttPropertyHub.in_';
-      window.open(waLink(msg), '_blank');
-      showToast('✅ Opening WhatsApp with your message!');
-      cf.reset();
+      goToWhatsApp(msg);
     });
   }
 }
