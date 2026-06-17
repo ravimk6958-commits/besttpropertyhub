@@ -1,432 +1,598 @@
 /* ============================================================
-   BESTT PROPERTY HUB — script.js
-   Forms submit directly to WhatsApp. All CTAs functional.
+   BESTT PROPERTY HUB — style.css  (LIGHT THEME)
+   Palette: Navy #0B1D35 | Gold #C9A84C | White #FFFFFF
+            Soft Grey #F5F7FA | Slate #4A5568 | Green #16A34A | Red #E55A4E
    ============================================================ */
 
-const WA_NUMBER = "917011054451";
-function waLink(msg) {
-  return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0B1D35;
+  --navy2:  #122844;
+  --gold:   #C9A84C;
+  --gold2:  #E8C060;
+  --white:  #ffffff;
+  --offwhite: #FAFAFA;
+  --light:  #F5F7FA;
+  --light2: #EEF1F6;
+  --slate:  #4A5568;
+  --slate2: #718096;
+  --green:  #16A34A;
+  --green2: #22c55e;
+  --red:    #E55A4E;
+  --border: #E2E8F0;
+  --shadow: 0 2px 16px rgba(11,29,53,0.08);
+  --shadow-md: 0 6px 28px rgba(11,29,53,0.12);
+  --shadow-lg: 0 12px 48px rgba(11,29,53,0.16);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --transition: 0.28s ease;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
-/* Reliable WhatsApp redirect — uses location.href instead of window.open
-   because mobile browsers (Chrome/Safari on Android & iOS) frequently block
-   window.open() popups fired from inside form-submit handlers. A direct
-   location change is never blocked and works identically on desktop. */
-function goToWhatsApp(msg) {
-  const url = waLink(msg);
-  window.location.href = url;
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--slate); background: var(--white); line-height: 1.65; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+select, input, textarea {
+  font: inherit; width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.72rem 1rem;
+  outline: none; background: var(--white);
+  color: var(--navy);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+select:focus, input:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+}
+textarea { resize: vertical; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 5rem 0; }
+.bg-light { background: var(--light); }
+.mt-2 { margin-top: 1.5rem; }
+.mt-auto { margin-top: auto; }
+.full-width { width: 100%; justify-content: center; }
+.desktop-br { display: block; }
+.form-note { font-size: 0.84rem; color: var(--slate2); margin-bottom: 1rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-sm); padding: 0.6rem 0.9rem; }
+
+/* ---- Buttons ---------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.5rem; border-radius: 50px;
+  font-weight: 600; font-size: 0.95rem;
+  transition: all var(--transition); white-space: nowrap;
+  cursor: pointer;
+}
+.btn-sm { padding: 0.5rem 1rem; font-size: 0.83rem; }
+.btn-lg { padding: 0.9rem 2rem; font-size: 1rem; }
+.btn-primary { background: var(--gold); color: var(--navy); }
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,76,0.35); }
+.btn-call { background: var(--red); color: var(--white); }
+.btn-call:hover { background: #cf4e44; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(229,90,78,0.4); }
+.btn-whatsapp { background: var(--green); color: var(--white); }
+.btn-whatsapp:hover { background: #15803d; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(22,163,74,0.4); }
+.btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
+.btn-outline-gold { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+.btn-outline-gold:hover { background: var(--gold); color: var(--navy); }
+.btn-search { background: var(--navy); color: var(--white); border-radius: var(--radius-sm); padding: 0.75rem 1.5rem; font-weight: 700; white-space: nowrap; }
+.btn-search:hover { background: var(--navy2); }
+
+.pulse-call { animation: pulseCTA 2.2s infinite; }
+.pulse-wa   { animation: pulseWA  2.2s 0.4s infinite; }
+@keyframes pulseCTA {
+  0%,100% { box-shadow: 0 0 0 0 rgba(229,90,78,0.45); }
+  55%     { box-shadow: 0 0 0 12px rgba(229,90,78,0); }
+}
+@keyframes pulseWA {
+  0%,100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.45); }
+  55%     { box-shadow: 0 0 0 12px rgba(22,163,74,0); }
 }
 
-/* ---- DATA -------------------------------------------------- */
-const PROPERTIES = [
-  { title: "Premium 3BHK Apartment", location: "Sector 17, Faridabad", type: "Apartment", price: "₹68 Lakhs", area: "1,350 sq.ft", beds: 3, baths: 2, img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600" },
-  { title: "2BHK Ready-to-Move Flat", location: "NIT Faridabad", type: "Apartment", price: "₹42 Lakhs", area: "980 sq.ft", beds: 2, baths: 2, img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600" },
-  { title: "Independent Builder Floor", location: "Sector 14, Faridabad", type: "Builder Floor", price: "₹75 Lakhs", area: "1,800 sq.ft", beds: 3, baths: 2, img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600" },
-  { title: "Spacious 4BHK Villa", location: "Sector 46, Faridabad", type: "Villa", price: "₹1.45 Crore", area: "2,800 sq.ft", beds: 4, baths: 3, img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600" },
-  { title: "Affordable 2BHK Flat", location: "Ballabhgarh, Faridabad", type: "Apartment", price: "₹32 Lakhs", area: "850 sq.ft", beds: 2, baths: 1, img: "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=600" },
-  { title: "Residential Plot 200 Sq Yd", location: "Neharpar, Greater Faridabad", type: "Plot", price: "₹55 Lakhs", area: "200 sq.yd", beds: 0, baths: 0, img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" }
-];
-
-const UPCOMING = [
-  { name: "Bestt Skyline Residences", location: "Sector 82, Neharpar Faridabad", rera: "RERA Approved", possession: "Dec 2026", startPrice: "₹38 Lakhs", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600" },
-  { name: "Green Valley Township", location: "Tigaon Road, Faridabad", rera: "RERA Registered", possession: "Mar 2027", startPrice: "₹28 Lakhs", img: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600" },
-  { name: "Royal Park Apartments", location: "Sector 88, Greater Faridabad", rera: "RERA Approved", possession: "Jun 2026", startPrice: "₹45 Lakhs", img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" }
-];
-
-const TESTIMONIALS = [
-  { text: "Bestt Property Hub helped me find the perfect 3BHK flat in Sector 17 within my budget. Their team knew every corner of Faridabad — professional, honest, and super responsive on WhatsApp!", name: "Rajesh Sharma", meta: "Bought 3BHK, Sector 17 Faridabad", rating: 5 },
-  { text: "I was looking for a commercial shop in NIT Faridabad for months. One call to Bestt Property Hub and they showed me 5 options the same week. Excellent local knowledge!", name: "Priya Malhotra", meta: "Commercial Shop, NIT Faridabad", rating: 5 },
-  { text: "Bought a plot in Neharpar through Bestt Property Hub. They verified all documents, handled the registration, and even helped with the loan. Best property consultants in Faridabad!", name: "Arun & Sunita Kapoor", meta: "Plot Purchase, Neharpar Faridabad", rating: 5 },
-  { text: "As an NRI I was worried about buying property in Faridabad remotely. Bestt Property Hub did video site visits, verified legality, and completed everything smoothly. 100% trustworthy!", name: "Vikram Nair", meta: "NRI Investment, Ballabhgarh Faridabad", rating: 5 },
-  { text: "Got a brilliant deal on a builder floor in Sector 14. Bestt Property Hub negotiated ₹3 Lakhs off the asking price. They truly work in the buyer's interest. Highly recommend!", name: "Deepa & Suresh Reddy", meta: "Builder Floor, Sector 14 Faridabad", rating: 5 }
-];
-
-const FAQS = [
-  { q: "Which areas in Faridabad does Bestt Property Hub serve?", a: "We cover all areas of Faridabad — including NIT, Old Faridabad, all Sectors (12 to 88+), Ballabhgarh, Neharpar / Greater Faridabad, Surajkund, Tigaon, Mewla Maharajpur, and IMT Faridabad. Just tell us your preferred area and we'll find the right property for you." },
-  { q: "What are the best areas to buy a flat in Faridabad?", a: "For budget housing: Neharpar / Greater Faridabad and Sector 82–88 offer great value. For mid-range: Sectors 14–17 and NIT Faridabad are well-developed. For premium: Sectors 15A, 28, and Surajkund-adjacent areas offer luxury options with excellent connectivity." },
-  { q: "What is the average price of a flat in Faridabad?", a: "A 2BHK flat in Faridabad typically ranges from ₹25 Lakhs (Neharpar emerging areas) to ₹60 Lakhs (prime sectors like 14, 15, 17). 3BHK flats range from ₹45 Lakhs to ₹1 Crore+ depending on the sector and builder. Call us for current rate cards." },
-  { q: "Is Neharpar / Greater Faridabad a good investment?", a: "Yes — Greater Faridabad is among the fastest-growing micro-markets in NCR. With Metro Phase 2 connectivity, NH-19 proximity, and lower land prices than Gurgaon, it offers excellent capital appreciation potential of 12–20% in the short to medium term." },
-  { q: "Do you help with home loans for Faridabad properties?", a: "Absolutely. We have partnerships with SBI, HDFC, ICICI, Axis Bank, and LIC Housing Finance. We help you compare rates, check eligibility online, and complete documentation — often securing preferential rates for our clients." },
-  { q: "Are all your Faridabad listings RERA approved?", a: "All under-construction and upcoming projects listed are RERA-registered under Haryana RERA (HRERA). For resale properties, we conduct physical and legal verification before listing. We never compromise on documentation transparency." },
-  { q: "What are the stamp duty charges in Faridabad (Haryana)?", a: "In Haryana, stamp duty is 5% for women buyers and 7% for men. Registration charges are 1% of the property value. We provide a complete cost breakdown inclusive of all charges before you make any decision." },
-  { q: "Can I get a free site visit arranged for properties in Faridabad?", a: "Yes! We arrange free site visits across all Faridabad areas at a time convenient for you — weekdays or weekends. Our consultant accompanies you and provides detailed briefing on the property, area, and investment potential." },
-  { q: "Do you handle property registration and legal paperwork in Faridabad?", a: "Yes, we provide end-to-end support including drafting the agreement to sell, coordinating with lawyers for title verification, accompanying you to the Sub-Registrar office in Faridabad, and ensuring a smooth registration." },
-  { q: "How can I contact Bestt Property Hub for a property in Faridabad?", a: "Simply call or WhatsApp us at +91 70110 54451 — we're available 7 days a week from 9 AM to 8 PM. You can also fill any enquiry form on this page and we will respond within minutes on WhatsApp." }
-];
-
-const BLOGS = [
-  { tag: "Faridabad Guide", title: "Best Areas to Buy Property in Faridabad in 2025", excerpt: "From affordable Neharpar to premium Sector 15A — a complete location-wise breakdown of Faridabad's real estate market with current rates.", date: "May 20, 2025", read: "7 min read", img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600" },
-  { tag: "Investment", title: "Why Neharpar / Greater Faridabad is the Next Big Investment", excerpt: "Metro connectivity, NH-19, and affordable land prices make Greater Faridabad the smartest buy in NCR right now. Here's the full data-backed case.", date: "Apr 28, 2025", read: "8 min read", img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600" },
-  { tag: "Buyer's Guide", title: "10 Things to Check Before Buying Property in Faridabad", excerpt: "HRERA verification, circle rates, connectivity to Delhi, and more — your complete pre-purchase checklist for buying property in Faridabad safely.", date: "Apr 10, 2025", read: "6 min read", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600" }
-];
+/* ---- Section Heading -------------------------------------- */
+.section-head { text-align: center; max-width: 660px; margin: 0 auto 3rem; }
+.section-label {
+  display: block; font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+  color: var(--navy); line-height: 1.2; margin-bottom: 0.75rem;
+}
+.section-head p { color: var(--slate2); font-size: 1rem; }
+.section-footer { text-align: center; margin-top: 2.5rem; }
 
 /* ============================================================
-   RENDER FUNCTIONS
+   HEADER — Light
    ============================================================ */
-function renderProperties() {
-  const grid = document.getElementById('featuredGrid');
-  if (!grid) return;
-  grid.innerHTML = PROPERTIES.map(p => `
-    <article class="prop-card reveal">
-      <div class="prop-img-wrap">
-        <img src="${p.img}" alt="${p.title} in Faridabad" loading="lazy" />
-        <span class="prop-badge">${p.type}</span>
-        <span class="prop-price">${p.price}</span>
-      </div>
-      <div class="prop-body">
-        <h3 class="prop-title">${p.title}</h3>
-        <p class="prop-location"><i class="fa-solid fa-location-dot"></i> ${p.location}</p>
-        <div class="prop-meta">
-          <span><i class="fa-solid fa-vector-square"></i> ${p.area}</span>
-          ${p.beds ? `<span><i class="fa-solid fa-bed"></i> ${p.beds} Beds</span>` : ''}
-          ${p.baths ? `<span><i class="fa-solid fa-bath"></i> ${p.baths} Baths</span>` : ''}
-        </div>
-      </div>
-      <div class="prop-actions">
-        <a href="${waLink('Hi, I am interested in ' + p.title + ' at ' + p.location + ' priced at ' + p.price + '. Please share more details.')}" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        <a href="tel:+917011054451" class="btn btn-call"><i class="fa-solid fa-phone"></i> Call</a>
-      </div>
-    </article>
-  `).join('');
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition);
 }
+.site-header.scrolled { box-shadow: var(--shadow-md); }
+.header-inner { display: flex; align-items: center; gap: 1.25rem; height: 68px; }
 
-function renderUpcoming() {
-  const grid = document.getElementById('upcomingGrid');
-  if (!grid) return;
-  grid.innerHTML = UPCOMING.map(p => `
-    <article class="upcoming-card reveal">
-      <div class="upcoming-img">
-        <img src="${p.img}" alt="${p.name}" loading="lazy" />
-        <span class="rera-badge">${p.rera}</span>
-      </div>
-      <div class="upcoming-body">
-        <h3>${p.name}</h3>
-        <div class="upcoming-details">
-          <span><i class="fa-solid fa-location-dot"></i> ${p.location}</span>
-          <span><i class="fa-solid fa-calendar"></i> Possession: ${p.possession}</span>
-        </div>
-        <div class="upcoming-price">Starting from ${p.startPrice}</div>
-        <div class="upcoming-actions">
-          <a href="${waLink('Hi, I want to download the brochure for ' + p.name + ' in ' + p.location + '.')}" target="_blank" class="btn btn-outline btn-sm"><i class="fa-solid fa-file-arrow-down"></i> Brochure</a>
-          <a href="${waLink('Hi, I am interested in ' + p.name + ' at ' + p.location + ' starting from ' + p.startPrice + '. Please share details.')}" target="_blank" class="btn btn-whatsapp btn-sm"><i class="fa-brands fa-whatsapp"></i> Enquire Now</a>
-        </div>
-      </div>
-    </article>
-  `).join('');
+/* Logo */
+.logo { display: flex; align-items: center; gap: 0.65rem; color: var(--navy); flex-shrink: 0; }
+.logo-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 9px; display: flex; align-items: center; justify-content: center;
+  color: var(--navy); font-size: 1.1rem;
 }
+.logo-text { display: flex; flex-direction: column; line-height: 1.15; }
+.logo-main { font-weight: 700; font-size: 0.95rem; color: var(--navy); }
+.logo-sub { font-size: 0.7rem; font-weight: 600; color: var(--gold); letter-spacing: 0.05em; text-transform: uppercase; }
 
-function renderTestimonials() {
-  const track = document.getElementById('testimonialsTrack');
-  const dots = document.getElementById('testimonialDots');
-  if (!track) return;
-  track.innerHTML = TESTIMONIALS.map(t => `
-    <div class="testimonial-card">
-      <div class="t-stars">${'<i class="fa-solid fa-star"></i>'.repeat(t.rating)}</div>
-      <p class="t-text">"${t.text}"</p>
-      <div class="t-author">
-        <div class="t-avatar">${t.name.charAt(0)}</div>
-        <div><div class="t-name">${t.name}</div><div class="t-meta">${t.meta}</div></div>
-      </div>
-    </div>
-  `).join('');
-  if (dots) {
-    dots.innerHTML = TESTIMONIALS.map((_, i) =>
-      `<span class="${i === 0 ? 'active' : ''}" data-i="${i}"></span>`
-    ).join('');
-    dots.querySelectorAll('span').forEach(d =>
-      d.addEventListener('click', () => goToSlide(+d.dataset.i))
-    );
-  }
+/* Nav */
+.main-nav { margin-left: auto; }
+.main-nav > ul { display: flex; }
+.main-nav > ul > li { position: relative; }
+.main-nav > ul > li > a {
+  display: block; padding: 0.6rem 0.85rem;
+  color: var(--slate); font-size: 0.87rem; font-weight: 500;
+  transition: color var(--transition);
 }
+.main-nav > ul > li > a:hover,
+.main-nav > ul > li > a.active { color: var(--gold); }
 
-let currentSlide = 0;
-function goToSlide(i) {
-  const track = document.getElementById('testimonialsTrack');
-  const dots = document.querySelectorAll('.testimonial-dots span');
-  if (!track) return;
-  const cards = track.querySelectorAll('.testimonial-card');
-  if (!cards.length) return;
-  currentSlide = Math.max(0, Math.min(i, cards.length - 1));
-  const cardW = cards[0].offsetWidth + 24;
-  track.style.transform = `translateX(-${currentSlide * cardW}px)`;
-  dots.forEach((d, idx) => d.classList.toggle('active', idx === currentSlide));
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: var(--white); border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg); min-width: 200px;
+  padding: 0.5rem 0; opacity: 0; pointer-events: none;
+  transition: all var(--transition); z-index: 100;
+  border: 1px solid var(--border);
 }
+.has-dropdown:hover .dropdown { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+.dropdown li a { display: block; padding: 0.6rem 1.25rem; color: var(--navy); font-size: 0.87rem; transition: background var(--transition); }
+.dropdown li a:hover { background: var(--light); color: var(--gold); }
 
-function startAutoSlide() {
-  setInterval(() => {
-    const track = document.getElementById('testimonialsTrack');
-    if (!track) return;
-    const total = track.querySelectorAll('.testimonial-card').length;
-    goToSlide((currentSlide + 1) % total);
-  }, 4500);
+.header-ctas { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+.hamburger { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  background: linear-gradient(160deg, var(--navy) 0%, #1a3a5c 100%),
+    url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600') center/cover no-repeat;
+  background-blend-mode: multiply;
+  padding-top: 68px;
 }
-
-function renderFAQ() {
-  const list = document.getElementById('faqList');
-  if (!list) return;
-  list.innerHTML = FAQS.map((f, i) => `
-    <div class="faq-item reveal">
-      <div class="faq-q" data-i="${i}">
-        <span>${f.q}</span>
-        <i class="fa-solid fa-plus"></i>
-      </div>
-      <div class="faq-a">${f.a}</div>
-    </div>
-  `).join('');
-  list.querySelectorAll('.faq-q').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const item = btn.closest('.faq-item');
-      const wasOpen = item.classList.contains('open');
-      list.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
-    });
-  });
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(170deg, rgba(11,29,53,0.88) 0%, rgba(11,29,53,0.55) 100%); }
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 3rem 1.5rem; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold2); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem;
+  animation: fadeDown 0.8s ease both;
 }
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  color: var(--white); line-height: 1.15; margin-bottom: 1.25rem;
+  animation: fadeDown 0.9s 0.1s ease both;
+}
+.hero-title span { color: var(--gold2); }
+.hero-sub { font-size: clamp(1rem, 1.8vw, 1.15rem); color: rgba(255,255,255,0.78); margin-bottom: 2.25rem; animation: fadeDown 1s 0.2s ease both; }
 
-function renderBlog() {
-  const grid = document.getElementById('blogGrid');
-  if (!grid) return;
-  grid.innerHTML = BLOGS.map(b => `
-    <article class="blog-card reveal">
-      <div class="blog-img"><img src="${b.img}" alt="${b.title}" loading="lazy" /></div>
-      <div class="blog-body">
-        <span class="blog-tag">${b.tag}</span>
-        <h3 class="blog-title">${b.title}</h3>
-        <p class="blog-excerpt">${b.excerpt}</p>
-        <div class="blog-meta">
-          <span><i class="fa-regular fa-calendar"></i> ${b.date}</span>
-          <span><i class="fa-regular fa-clock"></i> ${b.read}</span>
-        </div>
-      </div>
-    </article>
-  `).join('');
+/* Search Card */
+.search-card {
+  background: var(--white); border-radius: var(--radius);
+  padding: 1.25rem; max-width: 950px; margin: 0 auto 2.5rem;
+  box-shadow: var(--shadow-lg); animation: fadeUp 1s 0.3s ease both;
+}
+.search-fields { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 0.75rem; align-items: end; }
+.search-field label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.4rem; }
+.search-field label i { color: var(--gold); }
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeUp 1s 0.4s ease both; }
+.hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.45); animation: bounce 2s infinite; z-index: 2; }
+
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+}
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(20px); }  to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   TRUST STRIP — light version
+   ============================================================ */
+.trust-strip { background: var(--navy); padding: 1.5rem 0; border-bottom: 3px solid var(--gold); }
+.trust-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; text-align: center; }
+.trust-item { color: var(--white); }
+.trust-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--gold); }
+.trust-plus { font-size: 2rem; font-weight: 700; color: var(--gold); }
+.trust-icon { font-size: 2rem; color: var(--gold); display: block; margin-bottom: 0.25rem; }
+.trust-item p { font-size: 0.83rem; color: rgba(255,255,255,0.65); margin-top: 0.2rem; }
+
+/* ============================================================
+   FEATURED PROPERTIES
+   ============================================================ */
+.props-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+.prop-card {
+  background: var(--white); border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex; flex-direction: column;
+}
+.prop-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.prop-img-wrap { position: relative; height: 215px; overflow: hidden; }
+.prop-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.prop-card:hover .prop-img-wrap img { transform: scale(1.06); }
+.prop-badge { position: absolute; top: 1rem; left: 1rem; background: var(--gold); color: var(--navy); font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.7rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.06em; }
+.prop-price { position: absolute; bottom: 1rem; right: 1rem; background: var(--navy); color: var(--white); font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.9rem; }
+.prop-body { padding: 1.1rem 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.45rem; }
+.prop-title { font-family: var(--font-display); font-size: 1rem; color: var(--navy); font-weight: 700; }
+.prop-location { font-size: 0.83rem; color: var(--slate2); display: flex; align-items: center; gap: 0.4rem; }
+.prop-location i { color: var(--gold); }
+.prop-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.2rem; }
+.prop-meta span { font-size: 0.78rem; color: var(--slate2); display: flex; align-items: center; gap: 0.3rem; }
+.prop-meta i { color: var(--gold); font-size: 0.8rem; }
+.prop-actions { display: flex; gap: 0.5rem; padding: 0.85rem 1.25rem; border-top: 1px solid var(--border); margin-top: auto; flex-wrap: wrap; }
+.prop-actions .btn { flex: 1; justify-content: center; font-size: 0.78rem; padding: 0.5rem 0.6rem; }
+
+/* ============================================================
+   AREAS GRID
+   ============================================================ */
+.areas-grid { display: flex; flex-wrap: wrap; gap: 0.65rem; justify-content: center; margin-bottom: 2rem; }
+.area-chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--white); border: 1.5px solid var(--border);
+  color: var(--navy); font-size: 0.85rem; font-weight: 500;
+  padding: 0.55rem 1.1rem; border-radius: 50px;
+  transition: all var(--transition); box-shadow: var(--shadow);
+}
+.area-chip i { color: var(--gold); font-size: 0.75rem; }
+.area-chip:hover { background: var(--navy); color: var(--white); border-color: var(--navy); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.area-chip:hover i { color: var(--gold); }
+
+/* ============================================================
+   RESIDENTIAL CATEGORIES
+   ============================================================ */
+.category-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
+.cat-card {
+  position: relative; height: 265px; border-radius: var(--radius); overflow: hidden;
+  background: var(--cat-img) center/cover no-repeat; cursor: pointer; display: block;
+}
+.cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,29,53,0.92) 0%, rgba(11,29,53,0.15) 65%); transition: background var(--transition); }
+.cat-card:hover .cat-overlay { background: linear-gradient(to top, rgba(11,29,53,0.97) 0%, rgba(11,29,53,0.4) 65%); }
+.cat-content { position: absolute; bottom: 1.5rem; left: 1.5rem; color: var(--white); }
+.cat-content i { font-size: 1.8rem; color: var(--gold); display: block; margin-bottom: 0.4rem; }
+.cat-content h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+.cat-content span { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+.cat-card:hover .cat-content h3 { color: var(--gold); }
+
+/* ============================================================
+   COMMERCIAL
+   ============================================================ */
+.commercial-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+.comm-card {
+  background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius);
+  padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;
+  transition: all var(--transition); box-shadow: var(--shadow);
+}
+.comm-card:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--shadow-lg); }
+.comm-icon { width: 52px; height: 52px; background: linear-gradient(135deg, var(--gold), var(--gold2)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 1.3rem; }
+.comm-card h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--navy); font-weight: 700; }
+.comm-card p { font-size: 0.86rem; color: var(--slate2); flex: 1; }
+.comm-count { font-size: 0.78rem; font-weight: 700; color: var(--gold); }
+
+/* ============================================================
+   UPCOMING PROJECTS
+   ============================================================ */
+.upcoming-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+.upcoming-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform var(--transition), box-shadow var(--transition); }
+.upcoming-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.upcoming-img { height: 195px; overflow: hidden; position: relative; }
+.upcoming-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.upcoming-card:hover .upcoming-img img { transform: scale(1.05); }
+.rera-badge { position: absolute; top: 1rem; right: 1rem; background: var(--green); color: var(--white); font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 4px; letter-spacing: 0.06em; }
+.upcoming-body { padding: 1.25rem; }
+.upcoming-body h3 { font-family: var(--font-display); color: var(--navy); font-size: 1.05rem; margin-bottom: 0.5rem; }
+.upcoming-details { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.65rem 0; }
+.upcoming-details span { font-size: 0.8rem; color: var(--slate2); display: flex; align-items: center; gap: 0.3rem; }
+.upcoming-details i { color: var(--gold); }
+.upcoming-price { font-size: 1.05rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem; }
+.upcoming-actions { display: flex; gap: 0.5rem; }
+.upcoming-actions .btn { flex: 1; justify-content: center; font-size: 0.8rem; }
+
+/* ============================================================
+   WHY CHOOSE US — Light
+   ============================================================ */
+.why-section { background: var(--light); }
+.why-section .section-head h2 { color: var(--navy); }
+.why-section .section-head p { color: var(--slate2); }
+.why-section .section-label { color: var(--gold); }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+.why-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 1.75rem;
+  transition: all var(--transition); box-shadow: var(--shadow);
+}
+.why-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.why-icon { width: 52px; height: 52px; background: linear-gradient(135deg, var(--gold), var(--gold2)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 1.25rem; margin-bottom: 1rem; }
+.why-card h3 { color: var(--navy); font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.why-card p { font-size: 0.86rem; color: var(--slate2); }
+
+/* ============================================================
+   INVESTMENT BENEFITS
+   ============================================================ */
+.invest-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.invest-text h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 2.4vw, 2.3rem); color: var(--navy); line-height: 1.2; margin: 0.5rem 0 1rem; }
+.invest-text p { color: var(--slate2); margin-bottom: 1rem; }
+.invest-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.invest-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); transition: all var(--transition); }
+.invest-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+.invest-card i { font-size: 1.6rem; color: var(--gold); display: block; margin-bottom: 0.75rem; }
+.invest-card h4 { color: var(--navy); font-size: 0.95rem; margin-bottom: 0.4rem; font-weight: 700; }
+.invest-card p { font-size: 0.83rem; color: var(--slate2); }
+
+/* ============================================================
+   TESTIMONIALS — Light
+   ============================================================ */
+.testimonials-section { background: var(--light); }
+.testimonials-section .section-head h2 { color: var(--navy); }
+.testimonials-section .section-label { color: var(--gold); }
+.testimonials-wrapper { overflow: hidden; }
+.testimonials-track { display: flex; gap: 1.5rem; transition: transform 0.5s ease; }
+.testimonial-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 2rem;
+  min-width: calc(33.333% - 1rem); flex-shrink: 0;
+  box-shadow: var(--shadow);
+}
+.t-stars { color: var(--gold); font-size: 0.95rem; margin-bottom: 1rem; }
+.t-text { font-size: 0.93rem; color: var(--slate); font-style: italic; margin-bottom: 1.5rem; line-height: 1.7; }
+.t-author { display: flex; align-items: center; gap: 0.75rem; }
+.t-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold2)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--navy); font-size: 1rem; flex-shrink: 0; }
+.t-name { font-weight: 700; color: var(--navy); font-size: 0.9rem; }
+.t-meta { font-size: 0.78rem; color: var(--slate2); }
+.testimonial-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem; }
+.testimonial-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all var(--transition); }
+.testimonial-dots span.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+/* ============================================================
+   LEAD GENERATION — Light
+   ============================================================ */
+.lead-section { background: var(--offwhite); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.lead-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.lead-text h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 2.4vw, 2.3rem); color: var(--navy); line-height: 1.2; margin: 0.5rem 0 1rem; }
+.lead-text p { color: var(--slate2); margin-bottom: 1.25rem; }
+.lead-perks { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+.lead-perks li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--slate); }
+.lead-perks i { color: var(--green); font-size: 0.88rem; }
+.lead-direct-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.lead-form-card { background: var(--white); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-lg); border: 1.5px solid var(--border); }
+.lead-form-card h3 { font-family: var(--font-display); color: var(--navy); font-size: 1.35rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+.lead-form { display: flex; flex-direction: column; gap: 0.85rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.38rem; }
+.form-group label { font-size: 0.8rem; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.07em; }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-img-wrap { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-lg); }
+.about-img-wrap img { width: 100%; height: 420px; object-fit: cover; }
+.about-badge { position: absolute; bottom: -1px; right: -1px; background: var(--gold); border-radius: var(--radius) 0 0 0; padding: 1.5rem; text-align: center; min-width: 120px; }
+.badge-num { display: block; font-size: 2rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.badge-label { font-size: 0.73rem; font-weight: 600; color: var(--navy); opacity: 0.75; }
+.about-content h2 { font-family: var(--font-display); font-size: clamp(1.7rem, 2.4vw, 2.3rem); color: var(--navy); line-height: 1.2; margin: 0.5rem 0 1rem; }
+.about-content p { color: var(--slate2); margin-bottom: 0.85rem; }
+.about-stats { display: flex; gap: 2rem; margin: 1.5rem 0; }
+.about-stats div { text-align: center; }
+.about-stats strong { display: block; font-family: var(--font-display); font-size: 1.8rem; color: var(--gold); }
+.about-stats span { font-size: 0.78rem; color: var(--slate2); }
+
+/* ============================================================
+   FAQ — Light
+   ============================================================ */
+.faq-section { background: var(--light); }
+.faq-section .section-head h2 { color: var(--navy); }
+.faq-section .section-head p { color: var(--slate2); }
+.faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 0.65rem; }
+.faq-item { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow); }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 1.05rem 1.5rem; cursor: pointer; color: var(--navy); font-weight: 600; font-size: 0.93rem; gap: 1rem; transition: background var(--transition); }
+.faq-q:hover { background: var(--light); }
+.faq-q i { color: var(--gold); transition: transform var(--transition); flex-shrink: 0; }
+.faq-item.open .faq-q { background: var(--light); border-bottom: 1px solid var(--border); }
+.faq-item.open .faq-q i { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; padding: 0 1.5rem; color: var(--slate2); font-size: 0.88rem; line-height: 1.7; transition: max-height 0.35s ease, padding 0.3s ease; }
+.faq-item.open .faq-a { max-height: 300px; padding: 1rem 1.5rem; }
+
+/* ============================================================
+   BLOG
+   ============================================================ */
+.blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+.blog-card { background: var(--white); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); transition: all var(--transition); }
+.blog-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.blog-img { height: 195px; overflow: hidden; }
+.blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.blog-card:hover .blog-img img { transform: scale(1.05); }
+.blog-body { padding: 1.25rem; }
+.blog-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.6rem; }
+.blog-title { font-family: var(--font-display); font-size: 1rem; color: var(--navy); font-weight: 700; margin-bottom: 0.5rem; line-height: 1.4; }
+.blog-excerpt { font-size: 0.83rem; color: var(--slate2); margin-bottom: 1rem; }
+.blog-meta { font-size: 0.76rem; color: var(--slate2); display: flex; gap: 1rem; }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.contact-info { display: flex; flex-direction: column; gap: 1rem; }
+.contact-detail { display: flex; align-items: flex-start; gap: 1rem; background: var(--white); border: 1px solid var(--border); padding: 1rem 1.25rem; border-radius: var(--radius-sm); box-shadow: var(--shadow); }
+.contact-detail > i { font-size: 1.2rem; color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+.contact-detail strong { display: block; color: var(--navy); font-size: 0.83rem; margin-bottom: 0.2rem; }
+.contact-detail a, .contact-detail span { font-size: 0.9rem; color: var(--slate); }
+.contact-detail a:hover { color: var(--gold); }
+.map-placeholder { background: var(--light); border: 2px dashed var(--border); border-radius: var(--radius); height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--slate2); gap: 0.4rem; }
+.map-placeholder i { font-size: 2rem; color: var(--gold); }
+.map-placeholder p { font-weight: 600; font-size: 0.9rem; color: var(--navy); }
+.map-placeholder span { font-size: 0.8rem; }
+.contact-cta-box { background: var(--light); border-radius: var(--radius-sm); padding: 1.25rem; text-align: center; }
+.contact-cta-box p { font-size: 0.85rem; color: var(--slate2); margin-bottom: 0.75rem; font-weight: 500; }
+.contact-form-card { background: var(--white); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-lg); border: 1.5px solid var(--border); }
+.contact-form-card h3 { font-family: var(--font-display); color: var(--navy); font-size: 1.35rem; margin-bottom: 0.4rem; }
+#contactForm { display: flex; flex-direction: column; gap: 0.85rem; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer { background: var(--navy); color: rgba(255,255,255,0.65); }
+.footer-top { padding: 4rem 1.5rem 3rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 3rem; }
+.footer-brand p { font-size: 0.86rem; margin-top: 1rem; line-height: 1.7; }
+.logo-light .logo-main { color: var(--white); }
+.logo-light .logo-sub { color: var(--gold); }
+.social-icons { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
+.social-icons a { width: 38px; height: 38px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65); font-size: 0.85rem; transition: all var(--transition); }
+.social-icons a:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.footer-col h4 { color: var(--white); font-size: 0.88rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.footer-col ul li { margin-bottom: 0.45rem; }
+.footer-col ul li a { font-size: 0.86rem; color: rgba(255,255,255,0.58); transition: color var(--transition); }
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-contact li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.86rem; margin-bottom: 0.75rem; }
+.footer-contact i { color: var(--gold); font-size: 0.9rem; flex-shrink: 0; }
+.footer-contact a { color: rgba(255,255,255,0.6); }
+.footer-contact a:hover { color: var(--gold); }
+.footer-wa { margin-top: 1.25rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.25rem 1.5rem; text-align: center; font-size: 0.82rem; }
+
+/* ============================================================
+   FLOATING BUTTONS
+   ============================================================ */
+.float-whatsapp, .float-call {
+  position: fixed; z-index: 999;
+  border-radius: 50px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.22);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.float-whatsapp {
+  bottom: 5.5rem; right: 1.25rem;
+  width: 58px; height: 58px;
+  background: var(--green); color: var(--white);
+  font-size: 1.6rem;
+  animation: floatPulse 2.5s infinite;
+}
+.float-call {
+  bottom: 1.25rem; right: 1.25rem;
+  background: var(--red); color: var(--white);
+  font-size: 0.9rem; font-weight: 700;
+  padding: 0 1.25rem; height: 50px;
+  gap: 0.45rem;
+}
+.float-whatsapp:hover, .float-call:hover { transform: scale(1.07); box-shadow: var(--shadow-lg); }
+.float-call-label { font-size: 0.82rem; font-weight: 700; }
+.float-tooltip {
+  position: absolute; right: calc(100% + 12px);
+  background: var(--navy); color: var(--white);
+  font-size: 0.76rem; font-weight: 600;
+  padding: 0.4rem 0.8rem; border-radius: 6px;
+  white-space: nowrap; opacity: 0; pointer-events: none;
+  transition: opacity var(--transition);
+}
+.float-whatsapp:hover .float-tooltip { opacity: 1; }
+@keyframes floatPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.5), 0 4px 20px rgba(0,0,0,0.22); }
+  50%     { box-shadow: 0 0 0 14px rgba(22,163,74,0), 0 4px 20px rgba(0,0,0,0.22); }
 }
 
 /* ============================================================
-   HERO SEARCH → WhatsApp
+   POPUP — Light
    ============================================================ */
-function initHeroSearch() {
-  const btn = document.getElementById('heroSearchBtn');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const type   = document.getElementById('heroType')?.value   || '';
-    const area   = document.getElementById('heroArea')?.value   || '';
-    const budget = document.getElementById('heroBudget')?.value || '';
-    if (!type && !area && !budget) {
-      showToast('Please select at least one option to search.');
-      return;
-    }
-    let msg = 'Hi, I am looking for a property in Faridabad.';
-    if (type)   msg += '\nProperty Type: ' + type;
-    if (area)   msg += '\nArea: ' + area;
-    if (budget) msg += '\nBudget: ' + budget;
-    msg += '\nPlease share available options.';
-    goToWhatsApp(msg);
-  });
-}
-
-/* ============================================================
-   LEAD FORM → WhatsApp
-   ============================================================ */
-function initForms() {
-  /* Lead / Consultation form */
-  const lf = document.getElementById('leadForm');
-  if (lf) {
-    lf.addEventListener('submit', e => {
-      e.preventDefault();
-      const name     = document.getElementById('lf_name')?.value.trim()     || '';
-      const phone    = document.getElementById('lf_phone')?.value.trim()    || '';
-      const interest = document.getElementById('lf_interest')?.value        || '';
-      const area     = document.getElementById('lf_area')?.value            || '';
-      const budget   = document.getElementById('lf_budget')?.value          || '';
-      const msg_txt  = document.getElementById('lf_msg')?.value.trim()      || '';
-
-      if (!name || !phone || !interest) {
-        showToast('⚠️ Please fill Name, Phone & Property Interest.');
-        return;
-      }
-      let msg = '🏡 *New Property Enquiry – Bestt Property Hub*';
-      msg += '\n\n*Name:* ' + name;
-      msg += '\n*Phone:* ' + phone;
-      msg += '\n*Interest:* ' + interest;
-      if (area)    msg += '\n*Preferred Area:* ' + area;
-      if (budget)  msg += '\n*Budget:* ' + budget;
-      if (msg_txt) msg += '\n*Message:* ' + msg_txt;
-      msg += '\n\n_Sent from BesttPropertyHub.in_';
-      goToWhatsApp(msg);
-    });
-  }
-
-  /* Contact form */
-  const cf = document.getElementById('contactForm');
-  if (cf) {
-    cf.addEventListener('submit', e => {
-      e.preventDefault();
-      const name  = document.getElementById('cf_name')?.value.trim()  || '';
-      const phone = document.getElementById('cf_phone')?.value.trim() || '';
-      const type  = document.getElementById('cf_type')?.value         || '';
-      const area  = document.getElementById('cf_area')?.value.trim()  || '';
-      const msg_t = document.getElementById('cf_msg')?.value.trim()   || '';
-
-      if (!name || !phone) {
-        showToast('⚠️ Please enter your Name and Phone Number.');
-        return;
-      }
-      let msg = '📞 *Contact Form – Bestt Property Hub*';
-      msg += '\n\n*Name:* ' + name;
-      msg += '\n*Phone:* ' + phone;
-      if (type)  msg += '\n*Property Type:* ' + type;
-      if (area)  msg += '\n*Area in Faridabad:* ' + area;
-      if (msg_t) msg += '\n*Message:* ' + msg_t;
-      msg += '\n\n_Sent from Contact Page – BesttPropertyHub.in_';
-      goToWhatsApp(msg);
-    });
-  }
-}
-
-/* ============================================================
-   COUNTER ANIMATION
-   ============================================================ */
-function animateCounters() {
-  document.querySelectorAll('.trust-num').forEach(el => {
-    const target = +el.dataset.target;
-    let current = 0;
-    const increment = Math.ceil(target / 60);
-    const timer = setInterval(() => {
-      current = Math.min(current + increment, target);
-      el.textContent = current;
-      if (current >= target) clearInterval(timer);
-    }, 28);
-  });
-}
-
-let countersAnimated = false;
-function initCounterObserver() {
-  const strip = document.querySelector('.trust-strip');
-  if (!strip) return;
-  const obs = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting && !countersAnimated) {
-      countersAnimated = true;
-      animateCounters();
-      obs.disconnect();
-    }
-  }, { threshold: 0.5 });
-  obs.observe(strip);
-}
-
-/* ============================================================
-   SCROLL REVEAL
-   ============================================================ */
-function initReveal() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-}
-
-/* ============================================================
-   HEADER SCROLL
-   ============================================================ */
-function initHeader() {
-  const h = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
-}
-
-/* ============================================================
-   MOBILE NAV
-   ============================================================ */
-function initMobileNav() {
-  const btn = document.getElementById('hamburger');
-  const nav = document.getElementById('mainNav');
-  btn.addEventListener('click', () => { btn.classList.toggle('open'); nav.classList.toggle('open'); });
-  document.querySelectorAll('.has-dropdown > a').forEach(a => {
-    a.addEventListener('click', e => {
-      if (window.innerWidth < 768) { e.preventDefault(); a.closest('.has-dropdown').classList.toggle('open'); }
-    });
-  });
-  nav.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => { if (window.innerWidth < 768) { nav.classList.remove('open'); btn.classList.remove('open'); } });
-  });
-}
-
-/* ============================================================
-   ACTIVE NAV
-   ============================================================ */
-function initActiveNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.main-nav a');
-  window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-    links.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + cur); });
-  }, { passive: true });
-}
-
-/* ============================================================
-   EXIT POPUP
-   ============================================================ */
-function initExitPopup() {
-  const popup = document.getElementById('exitPopup');
-  const close = document.getElementById('popupClose');
-  let shown = false;
-  const show = () => { if (!shown) { popup.classList.add('visible'); shown = true; } };
-  document.addEventListener('mouseleave', e => { if (e.clientY < 0) setTimeout(show, 300); });
-  setTimeout(show, 30000);
-  close.addEventListener('click', () => popup.classList.remove('visible'));
-  popup.addEventListener('click', e => { if (e.target === popup) popup.classList.remove('visible'); });
-}
-
-/* ============================================================
-   SMOOTH SCROLL
-   ============================================================ */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (target) { e.preventDefault(); window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 68, behavior: 'smooth' }); }
-    });
-  });
-}
+.popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity var(--transition); padding: 1rem; }
+.popup-overlay.visible { opacity: 1; pointer-events: all; }
+.popup-card { background: var(--white); border-radius: var(--radius); padding: 2.5rem; max-width: 480px; width: 100%; text-align: center; position: relative; transform: translateY(20px); transition: transform 0.35s ease; box-shadow: var(--shadow-lg); border: 2px solid var(--border); }
+.popup-overlay.visible .popup-card { transform: none; }
+.popup-close { position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border-radius: 50%; background: var(--light); color: var(--slate); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all var(--transition); border: 1px solid var(--border); }
+.popup-close:hover { background: var(--navy); color: var(--white); }
+.popup-badge { display: inline-block; background: rgba(201,168,76,0.1); color: var(--gold); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 1rem; border: 1px solid rgba(201,168,76,0.3); }
+.popup-card h3 { font-family: var(--font-display); color: var(--navy); font-size: 1.45rem; margin-bottom: 0.75rem; }
+.popup-card p { color: var(--slate2); font-size: 0.93rem; margin-bottom: 1.75rem; }
+.popup-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
 /* ============================================================
    TOAST
    ============================================================ */
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
-}
+.toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: var(--white); padding: 0.75rem 1.75rem; border-radius: 50px; font-size: 0.88rem; font-weight: 500; box-shadow: var(--shadow-lg); opacity: 0; transition: all 0.35s ease; z-index: 3000; pointer-events: none; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ============================================================
-   INIT
+   SCROLL REVEAL
    ============================================================ */
-document.addEventListener('DOMContentLoaded', () => {
-  renderProperties();
-  renderUpcoming();
-  renderTestimonials();
-  renderFAQ();
-  renderBlog();
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.in-view { opacity: 1; transform: none; }
 
-  initHeroSearch();
-  initForms();
-  initReveal();
-  initCounterObserver();
-  initHeader();
-  initMobileNav();
-  initActiveNav();
-  initExitPopup();
-  initSmoothScroll();
-
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.prop-card,.upcoming-card,.blog-card,.faq-item,.why-card,.invest-card,.comm-card,.cat-card').forEach(el => {
-      if (!el.classList.contains('reveal')) el.classList.add('reveal');
-    });
-    initReveal();
-  });
-
-  setTimeout(startAutoSlide, 800);
-});
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .props-grid, .upcoming-grid { grid-template-columns: repeat(2,1fr); }
+  .category-grid { grid-template-columns: repeat(2,1fr); }
+  .commercial-grid { grid-template-columns: repeat(2,1fr); }
+  .why-grid { grid-template-columns: repeat(2,1fr); }
+  .invest-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .blog-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 768px) {
+  .main-nav { position: fixed; top: 68px; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--border); padding: 1.25rem 1.5rem; flex-direction: column; transform: translateY(-110%); opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 999; margin: 0; box-shadow: var(--shadow-md); }
+  .main-nav.open { transform: none; opacity: 1; pointer-events: all; }
+  .main-nav > ul { flex-direction: column; gap: 0; }
+  .main-nav > ul > li > a { padding: 0.75rem 0; color: var(--navy); border-bottom: 1px solid var(--border); }
+  .dropdown { position: static; transform: none; opacity: 1; pointer-events: all; box-shadow: none; background: var(--light); border-radius: var(--radius-sm); margin-top: 0.25rem; display: none; border: none; }
+  .has-dropdown.open .dropdown { display: block; }
+  .dropdown li a { color: var(--slate); }
+  .hamburger { display: flex; }
+  .header-ctas .btn-whatsapp { display: none; }
+  .search-fields { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: repeat(2,1fr); }
+  .props-grid, .upcoming-grid, .blog-grid { grid-template-columns: 1fr; }
+  .category-grid { grid-template-columns: 1fr 1fr; }
+  .commercial-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .invest-cards { grid-template-columns: 1fr; }
+  .about-layout { grid-template-columns: 1fr; }
+  .about-img-wrap img { height: 260px; }
+  .lead-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .testimonial-card { min-width: 100%; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .desktop-br { display: none; }
+  .about-stats { gap: 1rem; justify-content: center; }
+  .section { padding: 3rem 0; }
+  .float-call-label { display: none; }
+  .float-call { width: 58px; height: 58px; padding: 0; border-radius: 50%; }
+  .lead-direct-ctas { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .category-grid, .commercial-grid { grid-template-columns: 1fr; }
+  .prop-actions { flex-direction: column; }
+  .upcoming-actions, .popup-ctas { flex-direction: column; }
+  .about-stats { flex-wrap: wrap; gap: 0.75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
